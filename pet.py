@@ -9,14 +9,19 @@ class Pet:
 
     def __str__(self):
         return (f"{self.name} {self.mood()}\n"
-                f" 배고픔: {self.hunger}\n"
-                f" 행복도: {self.happy}\n"
-                f" 에너지: {self.energy}\n")
+                f" 배고픔: {self.bar(self.hunger)} {self.hunger:>3}\n"
+                f" 행복도: {self.bar(self.happy)} {self.happy:>3}\n"
+                f" 에너지: {self.bar(self.energy)} {self.energy:>3}\n")
 
     def mood(self):
         if self.hunger >= 80 or self.happy <= 20: return "😭"
         if self.happy >= 70 and self.hunger <= 40: return "😁"
         return "😑"
+
+    def bar(self, value):
+        # 0 ~ 100 값을 10칸의 막대로 변환
+        filled = value // 10
+        return "*" * filled + "-" * (10 - filled)
     
     # 공통 메서드
     def _clamp(self, value):
