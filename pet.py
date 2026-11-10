@@ -6,6 +6,17 @@ class Pet:
         self.hunger = 30    # 배고픔 (0 ~ 100)
         self.happy = 70     # 행복도 (0 ~ 100)
         self.energy = 70    # 에너지 (0 ~ 100)
+
+    def __str__(self):
+        return (f"{self.name} {self.mood()}\n"
+                f" 배고픔: {self.hunger}\n"
+                f" 행복도: {self.happy}\n"
+                f" 에너지: {self.energy}\n")
+
+    def mood(self):
+        if self.hunger >= 80 or self.happy <= 20: return "😭"
+        if self.happy >= 70 and self.hunger <= 40: return "😁"
+        return "😑"
     
     # 공통 메서드
     def _clamp(self, value):
@@ -44,8 +55,15 @@ class Pet:
 
 # ------ 테스트 코드 -------
 choco = Pet("초코")
-dubu = Pet("두부")
 
 choco.feed()
 choco.feed()
 print(choco.name, "배고픔:", choco.hunger)
+
+for i in range(4):
+    choco.play()
+print("행복도:", choco.happy, "에너지:", choco.energy)
+
+choco.sleep()
+print("에너지:", choco.energy)
+print(choco)
